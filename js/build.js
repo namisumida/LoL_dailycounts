@@ -1,5 +1,5 @@
 var svg = d3.select("#svg-linechart");
-var dataset;
+var dataset, dataset420, dataset450, dataset1200;
 
 // Dimensions
 var w_svg = document.getElementById('svg-linechart').getBoundingClientRect().width; // get width and height based on window size
@@ -12,7 +12,8 @@ var color1200 = d3.rgb(191,59,39);
 var color450 = d3.rgb(148,157,72);
 var color420 = d3.rgb(69,106,131);
 
-var line, yScale, xScale;
+// Saving variables
+var line, yScale, xScale, xAxis, xTickValues1200, xTickValues400s;
 
 // Data changes
 var parseTime = d3.timeParse("%Y-%m-%d");
@@ -22,7 +23,8 @@ var rowConverter = function(d) {
     queueid: parseInt(d.queueid),
     ngames: parseInt(d.ngames)
   }
-}
+};
+var formatTime = d3.timeFormat("%b %d, %Y"); // date to string;
 
 // Default settings
 var show1200 = true;
@@ -33,6 +35,9 @@ d3.csv('data/daily_play_counts.csv', rowConverter, function(data) {
 
   // save dataset
   dataset = data;
+  dataset1200 = dataset.filter(function(d) { return d.queueid==1200; })
+  dataset420 = dataset.filter(function(d) { return d.queueid==420; })
+  dataset450 = dataset.filter(function(d) { return d.queueid==450; })
 
   // Create xScale - default xScale when 1200 is the only one being shown
   xScale = d3.scaleTime()
@@ -41,6 +46,16 @@ d3.csv('data/daily_play_counts.csv', rowConverter, function(data) {
                d3.max(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; })
              ])
              .range([dim.left, w_line-dim.right]);
+  xTickValues1200 = [dataset1200[2].day, dataset1200[8].day, dataset1200[14].day,
+                    dataset1200[20].day, dataset1200[26].day]
+  xAxis = d3.axisBottom()
+            .scale(xScale)
+            .tickValues(xTickValues1200)
+            .tickFormat(formatTime);
+  svg.append("g")
+     .attr("class", "xAxis")
+     .attr("transform", "translate(" + dim.left + "," + (dim.h_line-dim.bottom) + ")")
+     .call(xAxis);
 
   // Create yScale - always showing 1200, and that has the max
   yScale = d3.scaleLinear()
@@ -49,42 +64,6 @@ d3.csv('data/daily_play_counts.csv', rowConverter, function(data) {
                    d3.max(dataset, function(d) { return d.ngames; })
                  ])
                  .range([dim.h_line-dim.bottom-10, dim.top]); // -10 to account for xAxis
-
-  // Create x axis
-  var xAxis = d3.axisBottom()
-                .scale(xScale)
-                .ticks(5);
-  svg.append("g")
-     .attr("class", "xAxis")
-     .attr("transform", "translate(" + dim.left + "," + (dim.h_line-dim.bottom) + ")")
-     .call(xAxis);
-
-/*
-  group_dots = svg.append("g")
-                  .attr("id", "group_dots")
-  group_dots.selectAll("dot")
-            .data(dataset)
-            .enter()
-            .append("circle")
-            .attr("class", "dot")
-            .attr("cx", function(d) {
-              return xScale(d.day);
-            })
-            .attr("cy", function(d) {
-              return yScale(d.ngames);
-            })
-            .attr("r", 2)
-            .style("fill", function(d) {
-              if (d.queueid==1200) {
-                return color1200;
-              }
-              else if (d.queueid==450) {
-                return color450;
-              }
-              else {
-                return color420;
-              }
-            });*/
 
   // Create lines
   line = d3.line()
@@ -110,5 +89,27 @@ d3.csv('data/daily_play_counts.csv', rowConverter, function(data) {
              .attr("id", "line420")
              .style("stroke", "none")
              .attr("d", line); // calls line generator
+
+  // Draw dots
+  var group_dots = svg.append("g")
+                      .attr("id", "group_dots");
+  group_dots.selectAll("dot")
+            .data(dataset)
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", function(d) {
+              return xScale(d.day);
+            })
+            .attr("cy", function(d) {
+              return yScale(d.ngames);
+            })
+            .attr("r", 4)
+            .style("fill", function(d) {
+              if (d.queueid==1200) {
+                return color1200;
+              }
+              else { return "none"; }
+            });
 
 }); // end d3.csv

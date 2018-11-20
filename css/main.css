@@ -10,7 +10,6 @@ body,html {
   margin-top: 50px;
   height: 35px;
 }
-
 h5 {
   margin: 8px;
 }
@@ -48,6 +47,31 @@ button {
   color: white;
 }
 
+#counts {
+  position: relative;
+  margin: 0 auto;
+  min-width: 100px;
+  max-width: 340px;
+  margin-top: 10px;
+  height: 35px;
+}
+.count-text {
+  margin: 5px;
+  text-anchor: center;
+  font-weight: 500;
+  float: left;
+  font-size: 14px;
+}
+#counttext1200 {
+  color: rgb(191,59,39);
+}
+#counttext420 {
+  color: rgb(69,106,131);
+}
+#counttext450 {
+  color: rgb(148,157,72);
+}
+
 #graphic {
   position: relative;
   margin: 0 auto;
@@ -58,5 +82,5 @@ button {
 }
 .line {
   fill: none;
-  stroke-width: 2.5;
+  stroke-width: 4;
 }
