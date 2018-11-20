@@ -5,115 +5,58 @@ body,html {
 #options {
   position: relative;
   margin: 0 auto;
-  min-width: 430px;
-  max-width: 550px;
+  min-width: 100px;
+  max-width: 340px;
   margin-top: 50px;
-  height: 80px;
-}
-#container-options-metrics {
-  position: relative;
-  height: 80px;
-  margin-right: 0;
-  float: left;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-#container-options-sort {
-  position: relative;
-  height: 80px;
-  margin: 0;
-  float: left;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-#container-options-filter {
-  position: relative;
-  width: 115px;
-  height: 60px;
-  margin: 0;
-  margin-left: 10px;
-  margin-right: 10px;
-  float: left;
+  height: 35px;
 }
 
 h5 {
   margin: 8px;
-  color: #a19da8;
 }
 button {
-  background-color: none;
+  background-color: white;
   font-size: 13px;
   border-radius: 3px;
-  width: 70px;
+  width: 100px;
   height: 25px;
   font-weight: 600;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
   color: #a19da8;
   border: 1.5px solid #a19da8;
+  margin: 5px;
 }
-button:focus {
-  background-color: #a19da8;
+#button1200:focus {
+  background-color: rgb(191,59,39);
+  border: none;
   color: white;
 }
-#button-play {
-  background-color: #a19da8;
+#button1200 {
+  background-color: rgb(191,59,39);
+  border: none;
   color: white;
-  width: 85px;
 }
-#button-count {
-  background-color: #a19da8;
+#button450:focus {
+  background-color: rgb(148,157,72);
+  border: none;
   color: white;
-  width: 85px;
 }
-#button-alpha {
-  width: 123px;
-}
-#filter-class {
-  background-color: #a19da8;
-  height: 25px;
-  width: 115px;
-  font-size: 13px;
+#button420:focus {
+  background-color: rgb(69,106,131);
+  border: none;
   color: white;
-  font-weight: 500;
 }
 
 #graphic {
   position: relative;
   margin: 0 auto;
-  height: 2600px;
   max-width: 720px;
-  min-width: 650px;
+  min-width: 600px;
   top: 20px;
+  height: 300px;
 }
-
-.mode_label {
-  text-anchor: middle;
-  font-weight: 600;
-}
-
-.nameLabel {
-  font-size: 12px;
-  text-anchor: end;
-}
-
-.countLabel {
-  font-size: 11px;
+.line {
   fill: none;
-}
-
-.rankLabel {
-  font-size: 12px;
-  fill:none;
-  font-weight: bold;
-  text-anchor: end;
-}
-
-.breakline {
-  stroke: gray;
-  stroke-width: 0.1;
-}
-
-.background {
-  fill: white;
+  stroke-width: 2.5;
 }

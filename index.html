@@ -4,41 +4,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>League of Legends: Comparing three game modes</title>
+	<title>League of Legends: Play counts over time</title>
 
 	<link type="text/css" href="css/main.css" rel="stylesheet"/>
-
 
 </head>
 <body>
 	<section id="options">
-		<div id="container-options-metrics">
-			<h5>Show:</h5>
-			<button type="button" id="button-play" value="play">Play count</button>
-			<button type="button" id="button-win" value="win">Win rate</button>
-		</div>
-		<div id="container-options-sort">
-			<h5>Sort by:</h5>
-			<button type="button" id="button-count" value="count">Play count</button>
-			<button type="button" id="button-alpha" value="alpha">Champion name</button>
-		</div>
-		<div id="container-options-filter">
-			<h5>Filter:</h5>
-			<select id="filter-class">
-					<option value="all" selected="selected" class="dropdown-class">All classes</option>
-					<option value="Artillery" class="dropdown-class">Artillery</option>
-					<option value="Controller" class="dropdown-class">Controller</option>
-					<option value="Mage" class="dropdown-class">Mage</option>
-					<option value="Marksmen" class="dropdown-class">Marksmen</option>
-					<option value="Slayer" class="dropdown-class">Slayer</option>
-					<option value="Tank" class="dropdown-class">Tank</option>
-					<option value="Unique" class="dropdown-class">Unique</option>
-			</select>
-		</div>
+		<button type="button" id="button1200" value="1200">Nexus Blitz</button>
+		<button type="button" id="button420" value="420">Ranked 5v5</button>
+		<button type="button" id="button450" value="450">ARAM</button>
 	</section>
 	<section id="graphic">
-		<svg id="svg-barchart" width="100%" height="100%"></svg>
+		<svg id="svg-linechart" width="100%" height="100%"></svg>
 	</section>
+
+
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="js/build.js"></script>
 	<script src="js/interactivity.js"></script>
