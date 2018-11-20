@@ -1,0 +1,119 @@
+body,html {
+  font-family: system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+#options {
+  position: relative;
+  margin: 0 auto;
+  min-width: 430px;
+  max-width: 550px;
+  margin-top: 50px;
+  height: 80px;
+}
+#container-options-metrics {
+  position: relative;
+  height: 80px;
+  margin-right: 0;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#container-options-sort {
+  position: relative;
+  height: 80px;
+  margin: 0;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#container-options-filter {
+  position: relative;
+  width: 115px;
+  height: 60px;
+  margin: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  float: left;
+}
+
+h5 {
+  margin: 8px;
+  color: #a19da8;
+}
+button {
+  background-color: none;
+  font-size: 13px;
+  border-radius: 3px;
+  width: 70px;
+  height: 25px;
+  font-weight: 600;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  color: #a19da8;
+  border: 1.5px solid #a19da8;
+}
+button:focus {
+  background-color: #a19da8;
+  color: white;
+}
+#button-play {
+  background-color: #a19da8;
+  color: white;
+  width: 85px;
+}
+#button-count {
+  background-color: #a19da8;
+  color: white;
+  width: 85px;
+}
+#button-alpha {
+  width: 123px;
+}
+#filter-class {
+  background-color: #a19da8;
+  height: 25px;
+  width: 115px;
+  font-size: 13px;
+  color: white;
+  font-weight: 500;
+}
+
+#graphic {
+  position: relative;
+  margin: 0 auto;
+  height: 2600px;
+  max-width: 720px;
+  min-width: 650px;
+  top: 20px;
+}
+
+.mode_label {
+  text-anchor: middle;
+  font-weight: 600;
+}
+
+.nameLabel {
+  font-size: 12px;
+  text-anchor: end;
+}
+
+.countLabel {
+  font-size: 11px;
+  fill: none;
+}
+
+.rankLabel {
+  font-size: 12px;
+  fill:none;
+  font-weight: bold;
+  text-anchor: end;
+}
+
+.breakline {
+  stroke: gray;
+  stroke-width: 0.1;
+}
+
+.background {
+  fill: white;
+}
