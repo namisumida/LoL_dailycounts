@@ -1,17 +1,27 @@
+@font-face {
+  font-family: radnika-light;
+  src: url("Radnika-Light.otf");
+}
+@font-face {
+  font-family: radnika-bold;
+  src: url("Radnika-Bold.otf");
+}
+@font-face {
+  font-family: radnika-medium;
+  src: url("Radnika-Medium.otf");
+}
+
 body,html {
-  font-family: system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: radnika-light;
 }
 
 #options {
   position: relative;
   margin: 0 auto;
   min-width: 100px;
-  max-width: 340px;
+  max-width: 400px;
   margin-top: 50px;
   height: 35px;
-}
-h5 {
-  margin: 8px;
 }
 button {
   background-color: white;
@@ -25,6 +35,7 @@ button {
   color: #a19da8;
   border: 1.5px solid #a19da8;
   margin: 5px;
+  font-family: radnika-medium;
 }
 #button1200:focus {
   background-color: rgb(191,59,39);
@@ -46,32 +57,6 @@ button {
   border: none;
   color: white;
 }
-
-#counts {
-  position: relative;
-  margin: 0 auto;
-  min-width: 100px;
-  max-width: 340px;
-  margin-top: 10px;
-  height: 35px;
-}
-.count-text {
-  margin: 5px;
-  text-anchor: center;
-  font-weight: 500;
-  float: left;
-  font-size: 14px;
-}
-#counttext1200 {
-  color: rgb(191,59,39);
-}
-#counttext420 {
-  color: rgb(69,106,131);
-}
-#counttext450 {
-  color: rgb(148,157,72);
-}
-
 #graphic {
   position: relative;
   margin: 0 auto;

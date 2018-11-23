@@ -1,5 +1,6 @@
 var svg = d3.select("#svg-linechart");
 var dataset, dataset420, dataset450, dataset1200;
+var ma1200, ma420, ma450;
 
 // Dimensions
 var w_svg = document.getElementById('svg-linechart').getBoundingClientRect().width; // get width and height based on window size

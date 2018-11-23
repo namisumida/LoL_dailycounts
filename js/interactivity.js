@@ -2,6 +2,48 @@ var currentDate;
 
 d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
 
+  var expandAxis = function() {
+    xScale = d3.scaleTime()
+               .domain([
+                 d3.min(dataset, function(d) { return d.day; }),
+                 d3.max(dataset, function(d) { return d.day; })
+               ])
+               .range([dim.left, w_line-dim.right]);
+    xAxis = d3.axisBottom()
+              .scale(xScale)
+              .tickValues(xTickValues400s)
+              .tickFormat(formatTime);
+    svg.select(".xAxis")
+       .transition()
+       .duration(800)
+       .call(xAxis);
+
+    line = d3.line() // redefine line again because xScale changed
+             .x(function(d) { return xScale(d.day); })
+             .y(function(d) { return yScale(d.ngames); });
+  }; // end expand Axis function
+
+  var shrinkAxis = function() {
+    xScale = d3.scaleTime()
+               .domain([
+                 d3.min(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; }),
+                 d3.max(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; })
+               ])
+               .range([dim.left, w_line-dim.right]);
+    xAxis = d3.axisBottom()
+              .scale(xScale)
+              .tickValues(xTickValues1200)
+              .tickFormat(formatTime);
+    svg.select(".xAxis")
+       .attr("transform", "translate(" + dim.left + "," + (dim.h_line-dim.bottom) + ")")
+       .transition()
+       .duration(800)
+       .call(xAxis);
+    line = d3.line() // redefine line again because xScale changed
+             .x(function(d) { return xScale(d.day); })
+             .y(function(d) { return yScale(d.ngames); });
+  }; // end shrinkAxis
+
   xTickValues400s = [dataset420[2].day, dataset420[11].day, dataset420[20].day,
                      dataset420[29].day, dataset420[38].day, dataset420[47].day, dataset420[55].day];
 
@@ -20,11 +62,6 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
           else { return 4; }
         });
 
-  /*  // Show count
-    document.getElementById("counttext1200").innerHTML = d3.format(",")(dataset1200.filter(function(d) { return d.day==currentDate; })[0].ngames);
-    document.getElementById("counttext450").innerHTML = d3.format(",")(dataset450.filter(function(d) { return d.day==currentDate; })[0].ngames);
-    document.getElementById("counttext420").innerHTML = d3.format(",")(dataset420.filter(function(d) { return d.day==currentDate; })[0].ngames);
-*/
     // Show date
     xAxis.ticks(1).tickValues([currentDate]) //specify an array here for values
     svg.selectAll(".xAxis").call(xAxis)
@@ -39,7 +76,6 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
          else { return "middle"; }
        }) // end text anchor
   }) // end on mouseover
-
   svg.selectAll(".dot").on("mouseout", function(d) {
     svg.selectAll(".dot").attr("r", 4); // change dot style back
 
@@ -52,7 +88,7 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
       xAxis.tickValues(xTickValues1200);
       svg.select(".xAxis").call(xAxis);
     }
-  })
+  });
 
   // On button clicks
   d3.select("#button450").on("click", function() {
@@ -65,25 +101,9 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
     if (show450) {
       if (!show420) { // if 450 is the first line to be shown, then need to redefine xAxis and redraw lines
         // Expand xAxis
-        xScale = d3.scaleTime()
-                   .domain([
-                     d3.min(dataset, function(d) { return d.day; }),
-                     d3.max(dataset, function(d) { return d.day; })
-                   ])
-                   .range([dim.left, w_line-dim.right]);
-        xAxis = d3.axisBottom()
-                  .scale(xScale)
-                  .tickValues(xTickValues400s)
-                  .tickFormat(formatTime);
-        svg.select(".xAxis")
-           .transition()
-           .duration(800)
-           .call(xAxis);
+        expandAxis();
 
-        // Show line
-        line = d3.line() // redefine line again because xScale changed
-                 .x(function(d) { return xScale(d.day); })
-                 .y(function(d) { return yScale(d.ngames); });
+        // draw lines
         svg.select("#line450")
            .transition()
            .duration(800)
@@ -138,24 +158,8 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
     // Hide line
     else {
       if (!show420) { // 420 line is also hidden, change xScale back to just 1200
-        xScale = d3.scaleTime()
-                   .domain([
-                     d3.min(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; }),
-                     d3.max(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; })
-                   ])
-                   .range([dim.left, w_line-dim.right]);
-        xAxis = d3.axisBottom()
-                  .scale(xScale)
-                  .tickValues(xTickValues1200)
-                  .tickFormat(formatTime);
-        svg.select(".xAxis")
-           .attr("transform", "translate(" + dim.left + "," + (dim.h_line-dim.bottom) + ")")
-           .transition()
-           .duration(800)
-           .call(xAxis);
-        line = d3.line() // redefine line again because xScale changed
-                 .x(function(d) { return xScale(d.day); })
-                 .y(function(d) { return yScale(d.ngames); });
+        shrinkAxis();
+        // change lines
         svg.select("#line1200")
             .transition()
             .duration(800)
@@ -215,25 +219,8 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
     if (show420) {
       if (!show450) {
         // Expand xAxis
-        xScale = d3.scaleTime()
-                   .domain([
-                     d3.min(dataset, function(d) { return d.day; }),
-                     d3.max(dataset, function(d) { return d.day; })
-                   ])
-                   .range([dim.left, w_line-dim.right]);
-        xAxis = d3.axisBottom()
-                      .scale(xScale)
-                      .tickValues(xTickValues400s)
-                      .tickFormat(formatTime);
-        svg.select(".xAxis")
-           .attr("transform", "translate(" + dim.left + "," + (dim.h_line-dim.bottom) + ")")
-           .transition()
-           .duration(800)
-           .call(xAxis)
-        // Show line
-        var line = d3.line()
-                 .x(function(d) { return xScale(d.day); })
-                 .y(function(d) { return yScale(d.ngames); });
+        expandAxis();
+        // draw lines
         svg.select("#line420")
            .transition()
            .duration(800)
@@ -287,24 +274,8 @@ d3.csv("data/daily_play_counts.csv", rowConverter, function(data) {
     // Hide line
     else {
       if (!show450) { // 450 line is also hidden, change xScale back to just 1200
-        xScale = d3.scaleTime()
-                   .domain([
-                     d3.min(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; }),
-                     d3.max(dataset.filter(function(d) { return d.queueid==1200; }), function(d) { return d.day; })
-                   ])
-                   .range([dim.left, w_line-dim.right]);
-        xAxis = d3.axisBottom()
-                  .scale(xScale)
-                  .tickValues(xTickValues1200)
-                  .tickFormat(formatTime);
-        svg.select(".xAxis")
-           .attr("transform", "translate(" + dim.left + "," + (dim.h_line-dim.bottom) + ")")
-           .transition()
-           .duration(800)
-           .call(xAxis);
-        line = d3.line() // redefine line again because xScale changed
-                 .x(function(d) { return xScale(d.day); })
-                 .y(function(d) { return yScale(d.ngames); });
+        shrinkAxis();
+        // change lines
         svg.select("#line1200")
            .transition()
            .duration(800)
