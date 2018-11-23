@@ -14,13 +14,34 @@
 body,html {
   font-family: radnika-light;
 }
-
+#title {
+  position: relative;
+  margin: 0 auto;
+  min-width: 430px;
+  max-width: 550px;
+  margin-top: 50px;
+}
+h1 {
+  font-family: radnika-black;
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
+h3 {
+  font-family: radnika-medium;
+  font-size: 14px;
+  text-align: center;
+}
+#title-line {
+  stroke-width: 2;
+  stroke: #a19da8;
+}
 #options {
   position: relative;
   margin: 0 auto;
   min-width: 100px;
-  max-width: 400px;
-  margin-top: 50px;
+  max-width: 340px;
+  margin-top: 20px;
   height: 35px;
 }
 button {
