@@ -10,6 +10,10 @@
   font-family: radnika-medium;
   src: url("Radnika-Medium.otf");
 }
+@font-face {
+  font-family: radnika-black;
+  src: url("Radnika-Black.otf");
+}
 
 body,html {
   font-family: radnika-light;
