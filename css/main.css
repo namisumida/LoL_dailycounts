@@ -17,11 +17,11 @@
 
 body,html {
   font-family: radnika-light;
+  min-width: 300px;
 }
 #title {
   position: relative;
   margin: 0 auto;
-  min-width: 430px;
   max-width: 550px;
   margin-top: 50px;
 }
@@ -43,17 +43,28 @@ h3 {
 #options {
   position: relative;
   margin: 0 auto;
-  min-width: 100px;
-  max-width: 340px;
-  margin-top: 20px;
-  height: 35px;
+}
+@media screen and (min-width:504px) {
+  #options {
+    width: 504px;
+  }
+}
+@media screen and (max-width: 504px) {
+  #options {
+    width: 330px;
+  }
+}
+@media screen and (max-width:340px) {
+  #options {
+    width: 150px;
+  }
 }
 button {
   background-color: white;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 3px;
-  width: 100px;
-  height: 25px;
+  width: 150px;
+  height: 30px;
   font-weight: 600;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -61,6 +72,7 @@ button {
   border: 1.5px solid #a19da8;
   margin: 5px;
   font-family: radnika-medium;
+  cursor: pointer;
 }
 #button1200:focus {
   background-color: rgb(191,59,39);
@@ -83,12 +95,11 @@ button {
   color: white;
 }
 #graphic {
+  top: 20px;
+  height: 300px;
   position: relative;
   margin: 0 auto;
   max-width: 720px;
-  min-width: 600px;
-  top: 20px;
-  height: 300px;
 }
 .line {
   fill: none;
